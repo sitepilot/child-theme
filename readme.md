@@ -1,6 +1,8 @@
 # Child Theme
 
-> A WordPress child theme by Sitepilot for developing custom websites. This child theme is used to speed up development and is compatible with [Astra](https://wpastra.com/) and [Beaver Builder Theme](https://www.wpbeaverbuilder.com/wordpress-framework-theme/).
+> A WordPress child theme for developing custom websites. This child theme is used to speed up development and is compatible with [Astra](https://wpastra.com/) and [Beaver Builder Theme](https://www.wpbeaverbuilder.com/wordpress-framework-theme/).
+
+[🚀 Download the latest version here.](https://update.sitepilot.io/v3/download/child-theme)
 
 ## Usage
 
