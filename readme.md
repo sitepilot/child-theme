@@ -11,6 +11,6 @@
    * Optional: replace `bb-theme` with `astra` if you would like to use Astra.
 3. Install composer packages: `composer install`.
 4. Install node modules: `npm install`.
-5. Start compiling scripts and stylesheets: `npm start`.
+5. Start compiling scripts and stylesheets: `npm run watch`.
 
-*This child theme includes the [WPGulp](https://github.com/ahmadawais/WPGulp) workflow for compiling SCSS and Javascript, you can find more information about WPGulp [here](https://github.com/ahmadawais/WPGulp).*
+*This child theme uses [Laravel Mix](https://laravel-mix.com/) for live reloads (Browsersync) and compiling Sass / Javascript.*

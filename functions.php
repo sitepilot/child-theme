@@ -23,3 +23,4 @@ define('SITEPILOT_THEME_URL', trailingslashit(get_stylesheet_directory_uri()));
 define('SITEPILOT_THEME_FILE', SITEPILOT_THEME_DIR . 'functions.php');
 
 Sitepilot\Theme\Theme::init();
+ 
