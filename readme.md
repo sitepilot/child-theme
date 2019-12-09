@@ -13,4 +13,4 @@
 4. Install node modules: `npm install`.
 5. Start compiling scripts and stylesheets: `npm run watch`.
 
-*This child theme uses [Laravel Mix](https://laravel-mix.com/) for live reloads (Browsersync) and compiling Sass / Javascript.*
+*This child theme uses [Laravel Mix](https://laravel-mix.com/) for live reloads (Browsersync) and compiling Sass / Javascript. More information about configuring and using Laravel Mix can be found [here](https://laravel-mix.com/docs/5.0/installation).*
