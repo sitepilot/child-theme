@@ -1,11 +1,8 @@
 name: deploy
 
 on:
-  push:
-    branches:
-      - github-actions
-    tags:
-      - '*'
+  release:
+    types: [published]
       
 jobs:
   deploy:
@@ -21,9 +18,6 @@ jobs:
         npm run production
     - uses: docker://sitepilot/wp-ftp-deploy:latest
       env:
-        SP_UPDATE_VER: v3
+        SP_UPDATE_VER: private-v1
         SP_FTP_PASSWORD: ${{ secrets.SP_FTP_PASSWORD }}
-    - uses: actions/upload-artifact@master
-      with:
-        name: package
-        path: ./sp-deploy/package
+        GITHUB_TOKEN: ${{ secrets.SP_GITHUB_TOKEN }}
