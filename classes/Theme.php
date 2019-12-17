@@ -11,14 +11,13 @@ final class Theme
      */
     static public function init()
     {
-        self::init_classes();
+        /* Actions */
+        add_action('after_setup_theme', __CLASS__ . '::init_modules');
+        add_action('wp_enqueue_scripts', __CLASS__ . "::action_enqueue_scripts");
 
         /* Filters */
         add_filter('sp_client_website', '__return_true');
         add_filter('sp_update_themes', __CLASS__ . '::filter_update_themes');
-
-        /* Actions */
-        add_action('wp_enqueue_scripts', __CLASS__ . "::action_enqueue_scripts");
     }
 
     /**
@@ -49,15 +48,14 @@ final class Theme
     }
 
     /**
-     * Initialize theme classes.
+     * Initialize theme modules.
      *
      * @return void
      */
-    static private function init_classes()
+    static public function init_modules()
     {
-        Modules\ThemeAstra::init();
-        Modules\ThemeBeaverBuilder::init();
-        Modules\PluginAcf::init();
-        Modules\PluginBeaverBuilder::init();
+        Modules\Acf::init();
+        Modules\Astra::init();
+        Modules\BeaverBuilder::init();
     }
 }

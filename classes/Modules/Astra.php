@@ -2,7 +2,7 @@
 
 namespace Sitepilot\Theme\Modules;
 
-final class ThemeAstra
+final class Astra
 {
     /**
      * Initialize hooks.
@@ -11,21 +11,22 @@ final class ThemeAstra
      */
     static public function init()
     {
-        add_action('after_setup_theme', __CLASS__ . '::action_setup');
-    }
-
-    /**
-     * Setup module after themes are loaded.
-     *
-     * @return void
-     */
-    static public function action_setup()
-    {
-        if (!defined("ASTRA_THEME_VERSION")) {
+        if (!self::is_active()) {
             return;
         }
 
-        add_action('wp', __CLASS__ . '::hide_page_title');
+        /* Actions */
+        add_action('wp', __CLASS__ . '::action_hide_builder_page_title');
+    }
+
+    /**
+     * Checks if Astra is active.
+     *
+     * @return boolean
+     */
+    static public function is_active()
+    {
+        return defined("ASTRA_THEME_VERSION");
     }
 
     /**
@@ -33,7 +34,7 @@ final class ThemeAstra
      *
      * @return void
      */
-    public static function hide_page_title()
+    public static function action_hide_builder_page_title()
     {
         if (empty(get_post_meta(get_the_ID(), '_fl_builder_enabled', true))) {
             return;
