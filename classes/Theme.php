@@ -54,8 +54,8 @@ final class Theme
      */
     static public function init_modules()
     {
-        Modules\Acf::init();
-        Modules\Astra::init();
-        Modules\BeaverBuilder::init();
+        Support\Acf::init();
+        Support\Astra::init();
+        Support\BeaverBuilder::init();
     }
 }

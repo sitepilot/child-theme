@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitepilot\Theme\Modules;
+namespace Sitepilot\Theme\Support;
 
 final class BeaverBuilder
 {
