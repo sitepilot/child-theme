@@ -17,7 +17,7 @@ final class Theme
 
         /* Filters */
         add_filter('sp_client_website', '__return_true');
-        add_filter('sp_update_themes', __CLASS__ . '::filter_update_themes');
+        add_filter('sp_update_list', __CLASS__ . '::filter_update_list');
     }
 
     /**
@@ -37,13 +37,13 @@ final class Theme
      * @param array $themes
      * @return array $themes
      */
-    static public function filter_update_themes(array $themes)
+    static public function filter_update_list(array $themes)
     {
-        $theme = [];
         $theme['file'] = SITEPILOT_THEME_FILE;
         $theme['slug'] = get_option('stylesheet');
 
         array_push($themes, $theme);
+
         return $themes;
     }
 

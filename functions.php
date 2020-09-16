@@ -12,7 +12,7 @@ if (defined('SITEPILOT_THEME_VERSION')) {
 }
 
 // Useful global constants
-define('SITEPILOT_THEME_VERSION', '{{SP_VERSION}}');
+define('SITEPILOT_THEME_VERSION', wp_get_theme()->get('Version'));
 define('SITEPILOT_THEME_DIR', trailingslashit(get_stylesheet_directory()));
 define('SITEPILOT_THEME_URL', trailingslashit(get_stylesheet_directory_uri()));
 define('SITEPILOT_THEME_FILE', SITEPILOT_THEME_DIR . 'functions.php');
