@@ -27,7 +27,7 @@ final class Theme
      */
     static public function action_enqueue_scripts()
     {
-        $version = strpos(SITEPILOT_THEME_VERSION, '-dev') == false ? time() : SITEPILOT_THEME_VERSION;
+        $version = strpos(SITEPILOT_THEME_VERSION, '-{dev}') !== false ? time() : SITEPILOT_THEME_VERSION;
 
         wp_enqueue_style('sitepilot-theme', get_stylesheet_directory_uri() . '/assets/dist/css/theme.css', [], $version);
         //wp_enqueue_script('sitepilot-theme', get_stylesheet_directory_uri() . '/assets/dist/js/theme.js', array(), SITEPILOT_THEME_VERSION, $version);
