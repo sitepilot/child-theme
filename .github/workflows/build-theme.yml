@@ -1,0 +1,31 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - "*"
+  release:
+    types:
+      - created
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build plugin.
+        run: |
+          composer install --no-dev
+
+          npm install
+          npm run production
+
+      - name: "Deploy plugin to SFTP & release."
+        uses: docker://ghcr.io/sitepilot/wp-sftp-deploy:latest
+        env:
+          SP_SFTP_KEY: ${{ secrets.SP_SFTP_KEY }}
+          SP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SP_VERSION_FILE: "style.css"
+        if: github.event.release
