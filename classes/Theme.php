@@ -21,6 +21,36 @@ final class Theme
     }
 
     /**
+     * Initialize theme modules.
+     *
+     * @return void
+     */
+    static public function init_modules()
+    {
+        Support\Acf::init();
+        Support\Astra::init();
+        Support\BeaverBuilder::init();
+    }
+
+    /**
+     * Register theme to the Sitepilot updater.
+     *
+     * @param array $update_list
+     * @return array $update_list
+     */
+    static public function filter_update_list(array $update_list)
+    {
+        if (strpos(SITEPILOT_THEME_VERSION, '-dev') === false) {
+            $theme['file'] = SITEPILOT_THEME_FILE;
+            $theme['slug'] = get_option('stylesheet');
+
+            array_push($update_list, $theme);
+        }
+
+        return $update_list;
+    }
+
+    /**
      * Enqueue theme scripts and stylesheets.
      * 
      * @return void
@@ -31,33 +61,5 @@ final class Theme
 
         wp_enqueue_style('sitepilot-theme', get_stylesheet_directory_uri() . '/assets/dist/css/theme.css', [], $version);
         //wp_enqueue_script('sitepilot-theme', get_stylesheet_directory_uri() . '/assets/dist/js/theme.js', array(), SITEPILOT_THEME_VERSION, $version);
-    }
-
-    /**
-     * Register theme to the Sitepilot updater.
-     *
-     * @param array $themes
-     * @return array $themes
-     */
-    static public function filter_update_list(array $themes)
-    {
-        $theme['file'] = SITEPILOT_THEME_FILE;
-        $theme['slug'] = get_option('stylesheet');
-
-        array_push($themes, $theme);
-
-        return $themes;
-    }
-
-    /**
-     * Initialize theme modules.
-     *
-     * @return void
-     */
-    static public function init_modules()
-    {
-        Support\Acf::init();
-        Support\Astra::init();
-        Support\BeaverBuilder::init();
     }
 }
