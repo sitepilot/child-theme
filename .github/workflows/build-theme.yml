@@ -15,14 +15,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build plugin.
+      - name: Build theme.
         run: |
           composer install --no-dev
 
           npm install
           npm run production
 
-      - name: "Deploy plugin to SFTP & release."
+      - name: "Deploy theme to SFTP and release."
         uses: docker://ghcr.io/sitepilot/wp-sftp-deploy:latest
         env:
           SP_SFTP_KEY: ${{ secrets.SP_SFTP_KEY }}
