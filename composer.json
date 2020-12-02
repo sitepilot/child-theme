@@ -3,6 +3,8 @@
     "description": "A child theme used by Sitepilot for developing custom WordPress websites.",
     "type": "project",
     "license": "GNU General Public License v3.0",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "jenssegers/blade": "^1.4"
     },
