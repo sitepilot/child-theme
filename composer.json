@@ -1,9 +1,11 @@
 {
     "name": "sitepilot/child-theme",
-    "description": "A child theme for developing custom WordPress websites.",
+    "description": "A child theme used by Sitepilot for developing custom WordPress websites.",
     "type": "project",
-    "license": "GNU General Public License v2.0",
-    "require": {},
+    "license": "GNU General Public License v3.0",
+    "require": {
+        "jenssegers/blade": "^1.4"
+    },
     "autoload": {
         "psr-4": {
             "Sitepilot\\Theme\\": "classes/"

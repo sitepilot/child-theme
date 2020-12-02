@@ -2,8 +2,12 @@
 
 namespace Sitepilot\Theme;
 
+use Jenssegers\Blade\Blade;
+
 final class Theme
 {
+    private static $blade;
+
     /**
      * Initialize theme.
      *
@@ -27,6 +31,7 @@ final class Theme
      */
     static public function init_modules()
     {
+        Shortcodes::init();
         Support\Acf::init();
         Support\Astra::init();
         Support\BeaverBuilder::init();
@@ -57,9 +62,24 @@ final class Theme
      */
     static public function action_enqueue_scripts()
     {
-        $version = strpos(SITEPILOT_THEME_VERSION, '-{dev}') !== false ? time() : SITEPILOT_THEME_VERSION;
+        $version = strpos(SITEPILOT_THEME_VERSION, '-dev') !== false ? time() : SITEPILOT_THEME_VERSION;
 
+        wp_enqueue_style('sitepilot-module', get_stylesheet_directory_uri() . '/assets/dist/css/module.css', [], SITEPILOT_THEME_VERSION);
         wp_enqueue_style('sitepilot-theme', get_stylesheet_directory_uri() . '/assets/dist/css/theme.css', [], $version);
         //wp_enqueue_script('sitepilot-theme', get_stylesheet_directory_uri() . '/assets/dist/js/theme.js', array(), SITEPILOT_THEME_VERSION, $version);
+    }
+
+    /**
+     * Returns the Blade instance.
+     *
+     * @return Blade
+     */
+    static public function get_blade_instance(): Blade
+    {
+        if (!self::$blade) {
+            self::$blade = new Blade(SITEPILOT_THEME_DIR . '/views', SITEPILOT_THEME_DIR . '/cache');
+        }
+
+        return self::$blade;
     }
 }

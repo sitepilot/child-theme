@@ -1,0 +1,19 @@
+.sp-module {      
+    *,
+    ::before,
+    ::after {
+        box-sizing: border-box;
+        border-width: 0;
+        border-style: solid; 
+        border-color: #e2e8f0; 
+    }
+    
+    a {
+        color: inherit;
+        text-decoration: inherit;
+    }
+}
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
