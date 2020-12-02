@@ -12,5 +12,10 @@
         "psr-4": {
             "Sitepilot\\Theme\\": "classes/"
         }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "npm install"
+        ]
     }
 }
