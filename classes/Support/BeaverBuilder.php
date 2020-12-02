@@ -18,6 +18,15 @@ final class BeaverBuilder
         if (self::is_builder_active()) {
             /* Filters */
             add_filter('fl_builder_color_presets', __CLASS__ . '::filter_color_presets');
+            add_filter('sp_beaver_builder_ignored_media_files', function ($files) {
+                $files[] = 'module.css';
+                return $files;
+            });
+
+            /* Modules */
+            add_action('init', function () {
+                // require_once SITEPILOT_THEME_DIR . 'modules/sp-coming-soon/sp-coming-soon.php';
+            });
         }
 
         if (self::is_theme_active()) {
