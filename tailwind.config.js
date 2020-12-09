@@ -1,5 +1,5 @@
 module.exports = {
-  important: '.sp-module',
+  important: '.sp-block',
   future: {
     purgeLayersByDefault: true,
     removeDeprecatedGapUtilities: true
@@ -9,8 +9,8 @@ module.exports = {
       './*.php',
       './modules/**/*.php',
       './templates/**/*.php',
-      './views/**/*.blade.php',
-      './assets/js/components/*.vue'
+      './assets/js/components/*.vue',
+      './classes/Blocks/**/views/*.blade.php',
     ]
   },
   theme: {
@@ -23,7 +23,7 @@ module.exports = {
     extend: {
       colors: {
         theme: {
-          // 
+          "1": "#4F46E5"
         }
       }
     }

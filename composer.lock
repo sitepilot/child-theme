@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1b7ec0abdc60c570497cfae742cb2e3d",
+    "content-hash": "a56d37c4364087e27c14aa80900d68cd",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -99,7 +99,7 @@
         },
         {
             "name": "illuminate/bus",
-            "version": "v8.17.0",
+            "version": "v8.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/bus.git",
@@ -148,7 +148,7 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v8.17.0",
+            "version": "v8.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
@@ -198,7 +198,7 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v8.17.0",
+            "version": "v8.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
@@ -245,7 +245,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v8.17.0",
+            "version": "v8.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -289,7 +289,7 @@
         },
         {
             "name": "illuminate/events",
-            "version": "v8.17.0",
+            "version": "v8.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/events.git",
@@ -340,7 +340,7 @@
         },
         {
             "name": "illuminate/filesystem",
-            "version": "v8.17.0",
+            "version": "v8.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/filesystem.git",
@@ -398,7 +398,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v8.17.0",
+            "version": "v8.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -440,7 +440,7 @@
         },
         {
             "name": "illuminate/pipeline",
-            "version": "v8.17.0",
+            "version": "v8.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/pipeline.git",
@@ -484,16 +484,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v8.17.0",
+            "version": "v8.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "c8910d52254408c7245dd8044fb3e5b09292673f"
+                "reference": "4831dd18b35f030418d2c0e570a218915258ed38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/c8910d52254408c7245dd8044fb3e5b09292673f",
-                "reference": "c8910d52254408c7245dd8044fb3e5b09292673f",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/4831dd18b35f030418d2c0e570a218915258ed38",
+                "reference": "4831dd18b35f030418d2c0e570a218915258ed38",
                 "shasum": ""
             },
             "require": {
@@ -543,11 +543,11 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2020-11-29T20:24:47+00:00"
+            "time": "2020-12-08T14:56:59+00:00"
         },
         {
             "name": "illuminate/view",
-            "version": "v8.17.0",
+            "version": "v8.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/view.git",
@@ -838,6 +838,42 @@
                 "simple-cache"
             ],
             "time": "2017-10-23T01:57:42+00:00"
+        },
+        {
+            "name": "sitepilot/block",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sitepilot/block.git",
+                "reference": "bc5e9c142740dadd4006b5552a3c89e8d1cdbfe2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sitepilot/block/zipball/bc5e9c142740dadd4006b5552a3c89e8d1cdbfe2",
+                "reference": "bc5e9c142740dadd4006b5552a3c89e8d1cdbfe2",
+                "shasum": ""
+            },
+            "require": {
+                "jenssegers/blade": "^1.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sitepilot\\Block\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Nick Jansen",
+                    "email": "support@sitepilot.io"
+                }
+            ],
+            "description": "WordPress block library.",
+            "time": "2020-12-08T15:41:36+00:00"
         },
         {
             "name": "symfony/finder",

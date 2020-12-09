@@ -5,7 +5,7 @@ mix.js('assets/js/theme.js', 'assets/dist/js')
     .sass('assets/scss/theme.scss', 'assets/dist/css').options({
         processCssUrls: false
     })
-    .sass('assets/scss/module.scss', 'assets/dist/css').options({
+    .sass('assets/scss/block.scss', 'assets/dist/css').options({
         processCssUrls: false,
         postCss: [tailwindcss('./tailwind.config.js')]
     })
