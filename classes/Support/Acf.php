@@ -51,4 +51,22 @@ final class Acf
             'position' => 0
         ));
     }
+
+    /**
+     * Returns a theme option.
+     * 
+     * @param string $key
+     * @param mixed $default
+     * @return void
+     */
+    static public function get_option($key, $default = null)
+    {
+        $value = null;
+
+        if (self::is_active()) {
+            $value = get_field($key, 'option');
+        }
+
+        return $value ? $value : $default;
+    }
 }
