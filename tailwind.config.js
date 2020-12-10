@@ -7,10 +7,9 @@ module.exports = {
   purge: {
     content: [
       './*.php',
-      './modules/**/*.php',
-      './templates/**/*.php',
-      './assets/js/components/*.vue',
-      './classes/Blocks/**/views/*.blade.php',
+      './views/*.php',
+      './templates/*.php',
+      './classes/Blocks/**/views/*.blade.php'
     ]
   },
   theme: {
