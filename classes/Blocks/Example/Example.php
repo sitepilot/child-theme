@@ -27,10 +27,10 @@ class Example extends Block
     {
         return [
             Text::make('Title', 'title')
-                ->defaultValue(get_bloginfo('name')),
+                ->default_value(get_bloginfo('name')),
 
             Editor::make('Content', 'slot')
-                ->defaultValue('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
+                ->default_value('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
         ];
     }
 }
