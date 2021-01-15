@@ -5,17 +5,17 @@
     "license": "GPL-3.0-or-later",
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "require": {
-        "sitepilot/block": "^1.0"
-    },
     "autoload": {
         "psr-4": {
-            "Sitepilot\\Theme\\": "classes/"
+            "Sitepilot\\Child\\": "src/"
         }
     },
     "scripts": {
         "post-install-cmd": [
             "npm install"
         ]
+    },
+    "require": {
+        "sitepilot/wp-theme": "^1.0"
     }
 }

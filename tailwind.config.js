@@ -9,7 +9,7 @@ module.exports = {
       './*.php',
       './views/*.php',
       './templates/*.php',
-      './classes/Blocks/**/views/*.blade.php'
+      './blocks/**/views/*.blade.php'
     ]
   },
   theme: {
@@ -21,9 +21,8 @@ module.exports = {
     },
     extend: {
       colors: {
-        theme: {
-          "1": "#4F46E5"
-        }
+        primary: 'var(--sp-color-primary)',
+        secondary: 'var(--sp-color-secondary)'
       }
     }
   }
