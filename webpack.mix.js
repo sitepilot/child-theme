@@ -1,15 +1,10 @@
 const mix = require('laravel-mix');
-const tailwindcss = require('tailwindcss');
 
 mix.js('assets/js/theme.js', 'assets/dist/js')
-    .sass('assets/scss/theme.scss', 'assets/dist/css').options({
-        processCssUrls: false
-    })
-    .sass('assets/scss/base.scss', './assets/dist/css').options({
-        processCssUrls: false,
-        postCss: [tailwindcss('./vendor/sitepilot/wp-theme/tailwind.config.js')]
-    })
-    .setPublicPath('assets/dist')
+    .postCss('assets/css/theme.css', 'assets/dist/css', [
+        require('tailwindcss'),
+        require('postcss-nested')
+    ])
     .webpackConfig({
         externals: {
             "jquery": "jQuery"

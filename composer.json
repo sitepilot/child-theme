@@ -14,8 +14,5 @@
         "post-install-cmd": [
             "npm install"
         ]
-    },
-    "require": {
-        "sitepilot/wp-theme": "^1.0"
     }
 }

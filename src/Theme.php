@@ -2,31 +2,63 @@
 
 namespace Sitepilot\Child;
 
-use Sitepilot\Theme\Base;
-use Sitepilot\Theme\Template;
-
-class Theme extends Base
+final class Theme
 {
     /**
-     * Construct theme.
+     * The theme instance.
+     * 
+     * @var Theme
+     */
+    private static Theme $instance;
+
+    /**
+     * Create a new theme instance.
+     *
+     * @return static
+     */
+    public static function make(...$arguments)
+    {
+        if (!isset(self::$instance)) {
+            self::$instance = new static(...$arguments);
+        }
+
+        return self::$instance;
+    }
+
+    /**
+     * Construct the theme.
      * 
      * @return void
      */
     public function __construct()
     {
-        parent::__construct();
+        /* Actions */
+        add_action('wp_enqueue_scripts', [$this, "action_enqueue_scripts"]);
+        add_action('enqueue_block_editor_assets', [$this, 'action_enqueue_scripts']);
 
         /* Filters */
         add_filter('sp_client_website', '__return_true');
-        add_filter('sp_theme_layout', [$this, 'filter_theme_layout']);
+        add_filter('sp_blocks_enabled', '__return_true');
+        add_filter('sp_templates_enabled', '__return_true');
+        add_filter('sp_update_list', [$this, 'filter_update_list']);
+    }
 
-        add_filter('sp_theme_primary_color', function () {
-            return '#f59e0b';
-        });
+    /**
+     * Register theme to the Sitepilot updater.
+     *
+     * @param array $update_list
+     * @return array $update_list
+     */
+    public function filter_update_list(array $update_list): array
+    {
+        if (strpos(SITEPILOT_THEME_VERSION, '-dev') === false) {
+            $theme['file'] = SITEPILOT_THEME_FILE;
+            $theme['slug'] = get_option('stylesheet');
 
-        add_filter('sp_theme_secondary_color', function () {
-            return '#fbbf24';
-        });
+            array_push($update_list, $theme);
+        }
+
+        return $update_list;
     }
 
     /**
@@ -36,26 +68,12 @@ class Theme extends Base
      */
     public function action_enqueue_scripts(): void
     {
-        parent::action_enqueue_scripts();
+        $version = strpos(SITEPILOT_THEME_VERSION, '-dev') !== false ? time() : SITEPILOT_THEME_VERSION;
 
-        wp_enqueue_script('font-awesome-5');
+        /* Styles */
+        wp_enqueue_style('sp-theme', get_stylesheet_directory_uri() . '/assets/dist/css/theme.css', [], $version);
 
-        wp_enqueue_style('sp-base', get_stylesheet_directory_uri() . '/assets/dist/css/base.css', [], $this->model->get_theme_version());
-        wp_enqueue_style('sp-theme', get_stylesheet_directory_uri() . '/assets/dist/css/theme.css', [], $this->model->get_theme_version());
-        wp_enqueue_script('sp-theme', get_stylesheet_directory_uri() . '/assets/dist/js/theme.js', array(), $this->model->get_theme_version(), true);
-
-        wp_add_inline_style('sp-base', $this->get_theme_css());
-    }
-
-    /**
-     * Filter theme layout.
-     *
-     * @return string
-     */
-    public function filter_theme_layout()
-    {
-        if (Template::get_template_id() || in_array(get_post_type(), ['sp-template'])) {
-            return 'blocks';
-        }
+        /* Scripts */
+        wp_enqueue_script('sp-theme', get_stylesheet_directory_uri() . '/assets/dist/js/theme.js', ['jquery'], $version, true);
     }
 }
