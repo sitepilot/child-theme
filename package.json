@@ -11,7 +11,7 @@
     },
     "devDependencies": {
         "laravel-mix": "^6.0.6",
-        "postcss": "^8.1.14",
+        "postcss": "^8.2.8",
         "postcss-nested": "^5.0.5",
         "tailwindcss": "^2.0.3"
     }

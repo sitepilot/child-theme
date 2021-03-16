@@ -1,14 +1,16 @@
 module.exports = {
-  important: '.sp-theme-block',
+  important: '.sp-theme',
   future: {
     purgeLayersByDefault: true,
     removeDeprecatedGapUtilities: true
   },
   purge: {
     content: [
-      '**/*.php',
-      '**/*.blade.php',
-      './assets/js/*.js',
+      './*.php',
+      'src/**/*.php',
+      'includes/**/*.php',
+      'views/**/*.blade.php',
+      'blocks/**/*.blade.php'
     ]
   },
   theme: {

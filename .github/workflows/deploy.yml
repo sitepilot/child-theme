@@ -1,0 +1,24 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: |
+          composer install --no-progress --no-dev
+          npm run production
+
+#      - uses: sitepilot/action-deploy@main
+#        env:
+#          RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
+#        with:
+#          args: replace-version ./style.css && rclone sync ./ remote:sites/<site-name>/public/wp-content/themes/<theme-name> --exclude-from="./.deployignore"
+#        if: github.ref == 'refs/heads/main'

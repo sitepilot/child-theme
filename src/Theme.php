@@ -2,63 +2,77 @@
 
 namespace Sitepilot\Child;
 
-final class Theme
+use Sitepilot\Fields\Field;
+use Sitepilot\Blocks\Section;
+use Sitepilot\Modules\Theme\Base;
+use Sitepilot\Modules\Theme\Color;
+use Sitepilot\Modules\Theme\CssVar;
+
+class Theme extends Base
 {
     /**
-     * The theme instance.
-     * 
-     * @var Theme
-     */
-    private static Theme $instance;
-
-    /**
-     * Create a new theme instance.
+     * Initialize theme.
      *
-     * @return static
-     */
-    public static function make(...$arguments)
-    {
-        if (!isset(self::$instance)) {
-            self::$instance = new static(...$arguments);
-        }
-
-        return self::$instance;
-    }
-
-    /**
-     * Construct the theme.
-     * 
      * @return void
      */
-    public function __construct()
+    protected function init()
     {
-        /* Actions */
-        add_action('wp_enqueue_scripts', [$this, "action_enqueue_scripts"]);
-        add_action('enqueue_block_editor_assets', [$this, 'action_enqueue_scripts']);
-
         /* Filters */
         add_filter('sp_client_website', '__return_true');
         add_filter('sp_blocks_enabled', '__return_true');
         add_filter('sp_templates_enabled', '__return_true');
-        add_filter('sp_update_list', [$this, 'filter_update_list']);
     }
 
     /**
-     * Register theme to the Sitepilot updater.
+     * Returns the theme's option fields.
      *
-     * @param array $update_list
-     * @return array $update_list
+     * @return Field[]
      */
-    public function filter_update_list(array $update_list): array
+    public function fields()
     {
-        if (strpos(SITEPILOT_THEME_VERSION, '-dev') === false) {
-            $theme['file'] = SITEPILOT_THEME_FILE;
-            $theme['slug'] = get_option('stylesheet');
+        return [];
+    }
 
-            array_push($update_list, $theme);
-        }
+    /**
+     * Returns the theme's colors.
+     *
+     * @return Color[]
+     */
+    public function colors()
+    {
+        return [
+            new Color('primary', [
+                'value' => '#FF5733'
+            ])
+        ];
+    }
 
-        return $update_list;
+    /**
+     * Returns the theme's css vars.
+     *
+     * @return Color[]
+     */
+    public function css_vars()
+    {
+        return [
+            new CssVar('container', [
+                'value' => '1200px'
+            ])
+        ];
+    }
+
+    /**
+     * Returns the theme's blocks.
+     *
+     * @return Block[]
+     */
+    public function blocks()
+    {
+        return [
+            new Section([
+                'type' => 'acf'
+            ])
+        ];
     }
 
     /**
@@ -66,14 +80,15 @@ final class Theme
      * 
      * @return void
      */
-    public function action_enqueue_scripts(): void
+    public function enqueue_assets()
     {
-        $version = strpos(SITEPILOT_THEME_VERSION, '-dev') !== false ? time() : SITEPILOT_THEME_VERSION;
-
         /* Styles */
-        wp_enqueue_style('sp-theme', get_stylesheet_directory_uri() . '/assets/dist/css/theme.css', [], $version);
+        wp_enqueue_style($this->key, $this->url . '/assets/dist/css/theme.css', [], $this->version);
 
         /* Scripts */
-        wp_enqueue_script('sp-theme', get_stylesheet_directory_uri() . '/assets/dist/js/theme.js', ['jquery'], $version, true);
+        wp_enqueue_script($this->key, $this->url . '/assets/dist/js/theme.js', ['jquery'], $this->version, true);
+
+        /* Parent Assets */
+        parent::enqueue_assets();
     }
 }
