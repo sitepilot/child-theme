@@ -9,5 +9,5 @@ if (defined('SITEPILOT')) {
         require_once __DIR__ . '/vendor/autoload.php';
     }
 
-    $theme = Theme::make(get_stylesheet());
+    Theme::make(get_stylesheet());
 }
