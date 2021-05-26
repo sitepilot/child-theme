@@ -1,5 +1,5 @@
 module.exports = {
-  important: '.sp-theme',
+  important: '.sp-block',
   future: {
     purgeLayersByDefault: true,
     removeDeprecatedGapUtilities: true
@@ -7,17 +7,15 @@ module.exports = {
   purge: {
     content: [
       './*.php',
-      'src/**/*.php',
-      'includes/**/*.php',
-      'views/**/*.blade.php',
-      'blocks/**/*.blade.php'
+      'src/*.php',
+      'blocks/*.php'
     ]
   },
   theme: {
     extend: {
       colors: {
-        primary: 'var(--sp-color-primary)',
-        secondary: 'var(--sp-color-secondary)'
+        primary: '#1d4ed8',
+        secondary: '#2563eb'
       }
     }
   }

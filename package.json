@@ -10,9 +10,9 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "laravel-mix": "^6.0.6",
-        "postcss": "^8.2.8",
+        "laravel-mix": "^6.0.19",
+        "postcss": "^8.3.0",
         "postcss-nested": "^5.0.5",
-        "tailwindcss": "^2.0.3"
+        "tailwindcss": "^2.1.2"
     }
 }

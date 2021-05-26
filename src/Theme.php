@@ -2,93 +2,104 @@
 
 namespace Sitepilot\Child;
 
-use Sitepilot\Fields\Field;
-use Sitepilot\Blocks\Section;
-use Sitepilot\Modules\Theme\Base;
-use Sitepilot\Modules\Theme\Color;
-use Sitepilot\Modules\Theme\CssVar;
+use WP_Theme;
 
-class Theme extends Base
+final class Theme
 {
+    /**
+     * WP theme object.
+     * 
+     * @var WP_Theme
+     */
+    public $theme;
+
+    /**
+     * Theme colors.
+     * 
+     * @var array
+     */
+    public $colors = [
+        [
+            'slug' => 'primary',
+            'name' => 'Primary',
+            'color' => '#1d4ed8'
+        ], [
+            'slug' => 'secondary',
+            'name' => 'Secondary',
+            'color' => '#2563eb'
+        ], [
+            'slug' => 'white',
+            'name' => 'White',
+            'color' => '#ffffff'
+        ], [
+            'slug' => 'black',
+            'name' => 'Black',
+            'color' => '#000000'
+        ]
+    ];
+
     /**
      * Initialize theme.
      *
      * @return void
      */
-    protected function init()
+    public function __construct()
     {
+        $this->theme = wp_get_theme();
+
         /* Filters */
         add_filter('sp_client_website', '__return_true');
-        add_filter('sp_blocks_enabled', '__return_true');
-        add_filter('sp_templates_enabled', '__return_true');
+        add_filter('astra_color_palettes', [$this, 'filter_color_presets']);
+
+        /* Actions */
+        add_action('after_setup_theme', [$this, 'action_add_theme_support']);
+        add_action('wp_enqueue_scripts', [$this, 'action_enqueue_scripts']);
+        add_action('enqueue_block_editor_assets', [$this, 'action_enqueue_scripts']);
     }
 
     /**
-     * Returns the theme's option fields.
-     *
-     * @return Field[]
-     */
-    public function fields()
-    {
-        return [];
-    }
-
-    /**
-     * Returns the theme's colors.
-     *
-     * @return Color[]
-     */
-    public function colors()
-    {
-        return [
-            new Color('primary', [
-                'value' => '#FF5733'
-            ])
-        ];
-    }
-
-    /**
-     * Returns the theme's css vars.
-     *
-     * @return Color[]
-     */
-    public function css_vars()
-    {
-        return [
-            new CssVar('container', [
-                'value' => '1200px'
-            ])
-        ];
-    }
-
-    /**
-     * Returns the theme's blocks.
-     *
-     * @return Block[]
-     */
-    public function blocks()
-    {
-        return [
-            new Section([
-                'type' => 'acf'
-            ])
-        ];
-    }
-
-    /**
-     * Enqueue theme scripts and stylesheets.
+     * Register theme styles and scripts.
      * 
      * @return void
      */
-    public function enqueue_assets()
+    public function action_enqueue_scripts()
     {
+        $version = strpos($this->theme->version, '-dev') ? time() : $this->theme->version;
+
         /* Styles */
-        wp_enqueue_style($this->key, $this->url . '/assets/dist/css/theme.css', [], $this->version);
+        wp_enqueue_style($this->theme->stylesheet, get_stylesheet_directory_uri() . '/assets/dist/css/theme.css', [], $version);
 
         /* Scripts */
-        wp_enqueue_script($this->key, $this->url . '/assets/dist/js/theme.js', ['jquery'], $this->version, true);
+        wp_enqueue_script($this->theme->stylesheet, get_stylesheet_directory_uri() .  '/assets/dist/js/theme.js', ['jquery'], $version, true);
+    }
 
-        /* Parent Assets */
-        parent::enqueue_assets();
+    /**
+     * Filter theme colors.
+     *
+     * @return array
+     */
+    public function filter_color_presets()
+    {
+        $colors = array();
+
+        foreach ($this->colors as $color) {
+            $colors[] = $color['color'];
+        }
+
+        return $colors;
+    }
+
+    /**
+     * Add theme support.
+     *
+     * @return void
+     */
+    public function action_add_theme_support()
+    {
+        // Disable Custom Colors
+        add_theme_support('disable-custom-colors');
+
+        // Editor Color Palette
+        add_theme_support('editor-color-palette', $this->colors);
     }
 }
